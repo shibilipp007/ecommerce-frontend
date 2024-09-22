@@ -17,10 +17,7 @@ export default function Signup() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await api.post(
-        `${import.meta.env.VITE_API_URL}/users`,
-        data
-      );
+      const response = await api.post(`/users`, data);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -28,9 +25,10 @@ export default function Signup() {
   };
   return (
     <form
-      className="w-[400px] mx-auto mt-10 p-6 border border-gray-400"
+      className="w-[450px] mx-auto mt-10 p-11 border border-gray-400"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <h1 className="text-3xl font-bold pb-6">Create a account</h1>
       <Input
         label={"Name"}
         id={"name"}
@@ -61,17 +59,17 @@ export default function Signup() {
       />
 
       <button
-        className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full"
+        className="rounded-md select-none bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-full"
         type="submit"
       >
         Signup
       </button>
-      <div className="mt-1 text-center flex flex-col">
-        <Link className="text-blue-600 hover:underline" to={`/login`}>
-          alredy have an account?
-        </Link>
-        <Link className="text-blue-600 hover:underline">
-          need a seller account?
+      <div className="text-center flex flex-col gap-y-2 mt-4">
+        <Link
+          className="flex items-center justify-center h-9 rounded-md bg-white text-slate-700 border border-solid border-gray-300 shadow text-sm font-medium select-none hover:bg-gray-50"
+          to={`/login`}
+        >
+          Alredy have an account? Sign in
         </Link>
       </div>
     </form>

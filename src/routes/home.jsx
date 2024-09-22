@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import PorductCard from "../components/porductCard";
+import { useLoaderData } from "react-router-dom";
+import api from "../lib/api";
 
 const categories = [
   "Dresess",
@@ -9,7 +11,16 @@ const categories = [
   "T-Shirts",
 ];
 
+export async function loader() {
+  const response = await api.get(`/products`);
+  const products = response.data;
+  console.log(products);
+
+  return { products };
+}
+
 export default function Home() {
+  const { products } = useLoaderData();
   return (
     <main>
       <section className="min-h-screen bg-[url('https://cdn.shopify.com/s/files/1/0785/1674/8585/files/Gingham_Grace_desk_8134c614-496e-49cb-95f5-981e6495d31d.png?v=1724742420&width=2000&height=1125&crop=center')] bg-cover bg-center flex items-center justify-center">
@@ -35,7 +46,7 @@ export default function Home() {
               <h1 className="text-4xl uppercase font-bold">Categories</h1>
             </div>
             <div className="grid grid-cols-6 gap-4">
-              {categories.map((c, i) => (
+              {categories?.map((c, i) => (
                 <div key={i}>
                   <div className="relative">
                     <img
@@ -62,28 +73,21 @@ export default function Home() {
               <h1 className="text-4xl uppercase font-bold">Popular products</h1>
             </div>
             <div className="grid grid-cols-6 gap-4">
-              {Array.from({ length: 12 }).map((c, i) => (
-                <div key={i}>
-                  <div className="relative">
-                    <Link to={"/gerilla-best-dress/details/12121215"}>
-                      <img
-                        src="https://img.freepik.com/free-photo/young-woman-beautiful-red-dress_1303-17506.jpg?size=626&ext=jpg"
-                        alt=""
-                        className="aspect-auto"
-                      />
-                    </Link>
-                  </div>
-                  <div>
-                    <h1 className="uppercase mt-2">Gerilla</h1>
-                    <p className="text-sm text-slate-500 truncate">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Hic, sequi.
-                    </p>
-                    <h3 className="mt-2 font-bold">&#8377;2,999</h3>
-                  </div>
-                </div>
+              {products?.map((product) => (
+                <PorductCard key={product._id} product={product} />
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div>
+          <div>
+            <img
+              className="mx-auto lg:w-4/5 mb-3"
+              src="/banner_women.png"
+              alt=""
+            />
           </div>
         </div>
       </section>

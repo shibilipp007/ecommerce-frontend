@@ -24,10 +24,10 @@ export default function Login() {
   return (
     <>
       <form
-        className="w-[400px] mx-auto mt-10 p-6 border border-gray-400"
+        className="w-[450px] mx-auto mt-10 p-11 border border-gray-400"
         onSubmit={handleSubmit(onsubmit)}
       >
-        <h1 className="text-center">Login</h1>
+        <h1 className="text-center text-3xl font-bold mb-6">Login</h1>
         <Input
           label={"Email"}
           id={"email"}
@@ -47,9 +47,12 @@ export default function Login() {
         >
           Login
         </button>
-        <div className="mt-1 text-center">
-          <Link className="text-blue-600 hover:underline" to={"/signup"}>
-            create an accoount
+        <div className="mt-2">
+          <Link
+            className="flex items-center justify-center h-9 rounded-md bg-white text-slate-700 border border-solid border-gray-300 shadow text-sm font-medium select-none hover:bg-gray-50"
+            to={"/signup"}
+          >
+            Don&apos;t have an account? Sign up
           </Link>
         </div>
       </form>

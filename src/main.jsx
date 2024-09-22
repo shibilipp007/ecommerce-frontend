@@ -2,32 +2,43 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
+import { Provider } from "react-redux";
+import store from "./app/store";
+import ErrorPage from "./error-page";
 import Root from "./routes/root";
 import Signup from "./routes/signup";
 import Login from "./routes/login";
-import Home from "./routes/home";
-import Details from "./routes/details";
+import Home, { loader as homeLoader } from "./routes/home";
+import Details, { loader as detailsLoader } from "./routes/details";
+import Cart from "./routes/cart";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        Component: Home,
+        loader: homeLoader,
       },
       {
-        path: "/:slug/details/:productID",
+        path: "/:slug/dp/:productId",
         Component: Details,
+        loader: detailsLoader,
       },
       {
         path: "/signup",
-        element: <Signup />,
+        Component: Signup,
       },
       {
         path: "/login",
-        element: <Login />,
+        Component: Login,
+      },
+      {
+        path: "/cart",
+        Component: Cart,
       },
     ],
   },
@@ -35,6 +46,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>
 );
