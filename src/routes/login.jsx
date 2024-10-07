@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import Input from "../components/input";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import api from "../lib/api";
+import { useDispatch } from "react-redux";
+import { changeLoginStatus } from "@/features/login";
 
 export default function Login() {
   const {
@@ -9,13 +11,15 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
 
   const onsubmit = async (data) => {
     try {
-      await api.post("/auth/login", data);
-      navigate("/");
+      const res = await api.post("/auth/login", data);
+      dispatch(changeLoginStatus({ loggedIn: true, user: res.data }));
+      window.location.href =
+        decodeURIComponent(searchParams.get("next")) || "/";
     } catch (error) {
       console.log(error);
     }

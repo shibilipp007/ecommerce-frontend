@@ -11,6 +11,10 @@ import Login from "./routes/login";
 import Home, { loader as homeLoader } from "./routes/home";
 import Details, { loader as detailsLoader } from "./routes/details";
 import Cart from "./routes/cart";
+import Checkout from "./routes/checkout";
+import Success from "./routes/success";
+import Search, { loader as searchLoader } from "./routes/search";
+import Profile, { loader as profileLoader } from "./routes/profile";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +43,29 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         Component: Cart,
+      },
+      {
+        path: "/orders",
+        children: [
+          {
+            path: "check-out",
+            Component: Checkout,
+          },
+          {
+            path: "success",
+            Component: Success,
+          },
+        ],
+      },
+      {
+        path: "search",
+        Component: Search,
+        loader: searchLoader,
+      },
+      {
+        path: "profile",
+        Component: Profile,
+        loader: profileLoader,
       },
     ],
   },

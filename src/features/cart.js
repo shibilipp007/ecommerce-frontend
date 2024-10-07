@@ -30,6 +30,30 @@ export const loadCartItems = createAsyncThunk(
   }
 );
 
+export const removeItems = createAsyncThunk(
+  "/cart/remove",
+  async (productId, { rejectWithValue }) => {
+    try {
+      const res = await api.post(`/cart/RemoveItem`, { productId });
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.ressponse.data.message);
+    }
+  }
+);
+
+export const updateQuantity = createAsyncThunk(
+  "/cart/quantity",
+  async ({ productId, quantity }, { rejectWithValue }) => {
+    try {
+      const res = await api.put(`/cart/`, { productId, quantity });
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 export const cartSlice = createSlice({
   name: "carts",
   initialState: {
@@ -65,6 +89,31 @@ export const cartSlice = createSlice({
       })
       .addCase(loadCartItems.rejected, (state, action) => {
         state.isPending = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(removeItems.pending, (state) => {
+        state.isPending = true;
+        state.error = false;
+      })
+      .addCase(removeItems.fulfilled, (state, action) => {
+        state.isPending = false;
+        state.cart = action.payload;
+      })
+      .addCase(removeItems.rejected, (state, action) => {
+        state.isPending = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(updateQuantity.pending, (state) => {
+        state.isPending = true;
+      })
+      .addCase(updateQuantity.fulfilled, (state, action) => {
+        state.isPending = true;
+        state.cart = action.payload;
+      })
+      .addCase(updateQuantity.rejected, (state, action) => {
+        state.isPending = true;
         state.error = action.payload;
       });
   },

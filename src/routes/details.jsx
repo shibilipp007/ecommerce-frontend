@@ -1,9 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import api from "../lib/api";
 import { useState } from "react";
 import clsx from "clsx";
 import { twMerge } from "tailwind-merge";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../features/cart";
 
 export async function loader({ params }) {
@@ -16,13 +16,25 @@ export default function Details() {
   const { data: product } = useLoaderData();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const { loggedIn } = useSelector((state) => state.login);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleAddToCart =
     ({ productId, quantity }) =>
     () => {
       dispatch(addToCart({ productId, quantity }));
     };
+
+  const protectedAction = (callback) => () => {
+    if (!loggedIn) {
+      return navigate(
+        `/login?next=${encodeURIComponent(window.location.pathname)}`
+      );
+    }
+
+    return callback();
+  };
 
   return (
     <div className="mx-auto lg:w-4/5">
@@ -65,13 +77,17 @@ export default function Details() {
           <div className="w-1/3">
             <div>
               <div>
-                <h1 className="font-bold text-xl mb-3">{product.title}</h1>
+                <h1 className="font-bold text-xl mb-3 dark:text-white">
+                  {product.title}
+                </h1>
               </div>
               <div>
-                <del>400</del>
-                <h3 className="text-3xl font-medium">&#8377;{product.price}</h3>
+                <del className="dark:text-white">400</del>
+                <h3 className="text-3xl font-medium dark:text-white">
+                  &#8377;{product.price}
+                </h3>
               </div>
-              <div className="my-4 flex">
+              <div className="my-4 flex dark:text-white">
                 <button
                   onClick={() => {
                     if (quantity <= 1) {
@@ -96,10 +112,12 @@ export default function Details() {
               </div>
               <button
                 className="px-4 h-9 rounded-md select-none bg-blue-500 text-white font-medium w-full mt-2"
-                onClick={handleAddToCart({
-                  productId: product._id,
-                  quantity,
-                })}
+                onClick={protectedAction(
+                  handleAddToCart({
+                    productId: product._id,
+                    quantity,
+                  })
+                )}
               >
                 Add to bag
               </button>

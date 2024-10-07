@@ -3,7 +3,10 @@ import { forwardRef } from "react";
 const Input = forwardRef(function Input({ label, id, error, ...props }, ref) {
   return (
     <div className="mb-3">
-      <label className="block mb-1 text-sm font-medium" htmlFor={id}>
+      <label
+        className="block mb-1 text-sm font-medium dark:text-white"
+        htmlFor={id}
+      >
         {label}
       </label>
       <input

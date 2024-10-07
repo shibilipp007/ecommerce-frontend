@@ -22,11 +22,11 @@ export async function loader() {
 export default function Home() {
   const { products } = useLoaderData();
   return (
-    <main>
+    <>
       <section className="min-h-screen bg-[url('https://cdn.shopify.com/s/files/1/0785/1674/8585/files/Gingham_Grace_desk_8134c614-496e-49cb-95f5-981e6495d31d.png?v=1724742420&width=2000&height=1125&crop=center')] bg-cover bg-center flex items-center justify-center">
         <div className=" flex flex-col items-center justify-center text-center gap-3 text-white">
           <h6 className="font-bold">CASUAL $ EVERYDAY</h6>
-          <h1 className="text-4xl ">
+          <h1 className="text-4xl">
             Effortlessly blend comfort <br /> & style!
           </h1>
           <h5 className="text-lg font-bold">
@@ -91,6 +91,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 }
