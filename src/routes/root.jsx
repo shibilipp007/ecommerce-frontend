@@ -132,7 +132,7 @@ export default function Root() {
                             }}
                             className="flex justify-between items-center"
                           >
-                            <Label htmlFor="dark">Airplane Mode</Label>
+                            <Label htmlFor="dark">Dark Mode</Label>
                             <Switch
                               checked={theme === "dark"}
                               onCheckedChange={() => toggleTheme()}
