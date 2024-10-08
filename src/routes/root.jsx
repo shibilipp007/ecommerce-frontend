@@ -143,7 +143,7 @@ export default function Root() {
                           <DropdownMenuItem
                             onClick={() => {
                               dispatch(logout());
-                              // window.location.reload();
+                              window.location.reload();
                             }}
                           >
                             <LogOut className="mr-2 h-4 w-4" />

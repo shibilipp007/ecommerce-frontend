@@ -32,7 +32,10 @@ export default function Profile() {
           </div>
           <button
             className="px-9 py-4 mb-6 bg-black text-white"
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              window.location.href = "/";
+            }}
           >
             Logout
           </button>
