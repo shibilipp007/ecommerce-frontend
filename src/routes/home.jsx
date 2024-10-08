@@ -43,7 +43,9 @@ export default function Home() {
         <div className="mx-auto lg:w-4/5">
           <div className="px-4">
             <div className="flex justify-center mb-6">
-              <h1 className="text-4xl uppercase font-bold">Categories</h1>
+              <h1 className="text-4xl uppercase font-bold dark:text-white">
+                Categories
+              </h1>
             </div>
             <div className="grid grid-cols-6 gap-4">
               {categories?.map((c) => (
@@ -66,7 +68,9 @@ export default function Home() {
         <div className="mx-auto lg:w-4/5">
           <div className="px-4">
             <div className="flex justify-center mb-6">
-              <h1 className="text-4xl uppercase font-bold">Popular products</h1>
+              <h1 className="text-4xl uppercase font-bold dark:text-white">
+                Popular products
+              </h1>
             </div>
             <div className="grid grid-cols-6 gap-4">
               {products?.map((product) => (
