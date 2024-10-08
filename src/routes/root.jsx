@@ -165,7 +165,7 @@ export default function Root() {
         <main className="flex-grow flex-shrink flex flex-col dark:bg-dark">
           <Outlet />
         </main>
-        <footer className="dark:bg-black flex-shrink-0">
+        <footer className="bg-slate-800 dark:bg-black flex-shrink-0">
           <div className="mx-auto lg:w-4/5 text-white py-6 px-4 items-center relative">
             <div className="grid grid-cols-4 justify-between ">
               <div className="flex flex-col">

@@ -2,25 +2,25 @@ import PorductCard from "../components/porductCard";
 import { useLoaderData } from "react-router-dom";
 import api from "../lib/api";
 
-const categories = [
-  "Dresess",
-  "Pants",
-  "Co-ords",
-  "Skirts",
-  "Shirts",
-  "T-Shirts",
-];
-
 export async function loader() {
-  const response = await api.get(`/products`);
-  const products = response.data;
-  console.log(products);
+  try {
+    const [productsResponse, categoriesResponse] = await Promise.all([
+      api.get("/products"),
+      api.get("/categories"),
+    ]);
 
-  return { products };
+    const products = productsResponse.data;
+    const categories = categoriesResponse.data;
+
+    return { products, categories };
+  } catch (error) {
+    console.log(error);
+    return { products: [], categories: [] };
+  }
 }
 
 export default function Home() {
-  const { products } = useLoaderData();
+  const { products, categories } = useLoaderData();
   return (
     <>
       <section className="min-h-screen bg-[url('https://cdn.shopify.com/s/files/1/0785/1674/8585/files/Gingham_Grace_desk_8134c614-496e-49cb-95f5-981e6495d31d.png?v=1724742420&width=2000&height=1125&crop=center')] bg-cover bg-center flex items-center justify-center">
@@ -46,18 +46,14 @@ export default function Home() {
               <h1 className="text-4xl uppercase font-bold">Categories</h1>
             </div>
             <div className="grid grid-cols-6 gap-4">
-              {categories?.map((c, i) => (
-                <div key={i}>
+              {categories?.map((c) => (
+                <div key={c._id}>
                   <div className="relative">
-                    <img
-                      src="https://img.freepik.com/free-photo/young-woman-beautiful-red-dress_1303-17506.jpg?size=626&ext=jpg"
-                      alt=""
-                      className="aspect-auto"
-                    />
+                    <img src={c.image} alt="" className="aspect-auto" />
                   </div>
                   <div>
                     <h1 className="uppercase text-sm font-bold text-center mt-2">
-                      {c}
+                      {c.title}
                     </h1>
                   </div>
                 </div>

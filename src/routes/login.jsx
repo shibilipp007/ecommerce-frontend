@@ -18,8 +18,9 @@ export default function Login() {
     try {
       const res = await api.post("/auth/login", data);
       dispatch(changeLoginStatus({ loggedIn: true, user: res.data }));
-      window.location.href =
-        decodeURIComponent(searchParams.get("next")) || "/";
+      window.location.href = decodeURIComponent(
+        searchParams.get("next") || "/"
+      );
     } catch (error) {
       console.log(error);
     }
