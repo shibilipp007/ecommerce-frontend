@@ -16,7 +16,7 @@ export default function Success() {
       Successfull. Your order is being prepared...
       <button
         className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-6"
-        onClick={() => navigate("/", { replace: true })}
+        onClick={() => navigate("/")}
       >
         Go to Homepage
       </button>
