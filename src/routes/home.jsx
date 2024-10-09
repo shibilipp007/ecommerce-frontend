@@ -1,5 +1,5 @@
 import PorductCard from "../components/porductCard";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import api from "../lib/api";
 
 export async function loader() {
@@ -21,6 +21,7 @@ export async function loader() {
 
 export default function Home() {
   const { products, categories } = useLoaderData();
+  const navigate = useNavigate();
   return (
     <>
       <section className="min-h-screen bg-[url('https://cdn.shopify.com/s/files/1/0785/1674/8585/files/Gingham_Grace_desk_8134c614-496e-49cb-95f5-981e6495d31d.png?v=1724742420&width=2000&height=1125&crop=center')] bg-cover bg-center flex items-center justify-center">
@@ -34,7 +35,10 @@ export default function Home() {
             collection, featuring cozy sweaters, versatile <br /> denim,
             laid-back tees, and relaxed-fit joggers for your everyday adventures
           </h5>
-          <button className="mt-5 px-8 py-4 bg-white text-slate-900 shadow-lg select-none rounded font-bold">
+          <button
+            className="mt-5 px-8 py-4 bg-white text-slate-900 shadow-lg select-none rounded font-bold"
+            onClick={() => navigate("/offers")}
+          >
             View collection
           </button>
         </div>
@@ -64,7 +68,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="py-10">
+      <section id="popular-Products" className="py-10">
         <div className="mx-auto lg:w-4/5">
           <div className="px-4">
             <div className="flex justify-center mb-6">
@@ -83,11 +87,13 @@ export default function Home() {
       <section>
         <div>
           <div>
-            <img
-              className="mx-auto lg:w-4/5 mb-3"
-              src="/banner_women.png"
-              alt=""
-            />
+            <Link to={"/offers"}>
+              <img
+                className="mx-auto lg:w-4/5 mb-3"
+                src="/banner_women.png"
+                alt=""
+              />
+            </Link>
           </div>
         </div>
       </section>

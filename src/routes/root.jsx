@@ -7,7 +7,6 @@ import api from "@/lib/api";
 import { changeLoginStatus, logout } from "@/features/login";
 import SearchBar from "@/components/searchBar";
 import { LogOut, User } from "lucide-react";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +18,12 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { AiFillInstagram } from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa6";
+import { CiTwitter } from "react-icons/ci";
+import { FaLinkedin } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+import { IoLogoWhatsapp } from "react-icons/io";
 
 export default function Root() {
   const loggedIn = useSelector((state) => state.login.loggedIn);
@@ -84,16 +89,10 @@ export default function Root() {
               <nav>
                 <ul className="flex flex-row gap-6 items-center">
                   <li>
-                    <Link>Home</Link>
+                    <Link to={"/"}>Home</Link>
                   </li>
                   <li>
-                    <Link>Shop</Link>
-                  </li>
-                  <li>
-                    <Link>About us</Link>
-                  </li>
-                  <li>
-                    <Link>Contact us</Link>
+                    <Link to={"/offers"}>Shop</Link>
                   </li>
                 </ul>
               </nav>
@@ -186,7 +185,25 @@ export default function Root() {
               </div>
               <div className="flex flex-col">
                 <h1>Contact US</h1>
-                <span>care.in@gmail.com </span>
+                <span className="flex flex-row items-center">
+                  <IoMdMail />
+                  care.in@gmail.com
+                </span>
+                <span className="flex flex-row items-center">
+                  <IoLogoWhatsapp />
+                  +91 9876543210
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="text-white flex items-center justify-center py-9">
+            <div className="flex flex-col items-center">
+              <h1 className="text-xl">Follow us</h1>
+              <div className="flex flex-row gap-2 mt-3">
+                <AiFillInstagram size={30} />
+                <FaFacebookF size={30} />
+                <CiTwitter size={30} />
+                <FaLinkedin size={30} />
               </div>
             </div>
           </div>

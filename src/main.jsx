@@ -15,6 +15,7 @@ import Checkout from "./routes/checkout";
 import Success from "./routes/success";
 import Search, { loader as searchLoader } from "./routes/search";
 import Profile, { loader as profileLoader } from "./routes/profile";
+import Shop, { loader as shopLoader } from "./routes/shop";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,11 @@ const router = createBrowserRouter([
         path: "profile",
         Component: Profile,
         loader: profileLoader,
+      },
+      {
+        path: "offers",
+        Component: Shop,
+        loader: shopLoader,
       },
     ],
   },
